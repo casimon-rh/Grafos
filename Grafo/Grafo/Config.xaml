@@ -1,0 +1,48 @@
+﻿<c:MetroWindow x:Class="Grafo.Config"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:c="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:l="clr-namespace:Grafo"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Title="Configuracion" Height="400" Width="500">
+    <Window.Resources>
+        <l:RutinaConfiguracion x:Key="Rutina"/>
+    </Window.Resources>
+    <Grid>
+        <Label Margin="10,10,0,0" Content="Numero de Vértices" HorizontalAlignment="Left" Width="123" Height="25" VerticalAlignment="Top"/>
+        <c:NumericUpDown x:Name="Vertices" Margin="0,10,20,0"  HorizontalAlignment="Right" Width="123" Height="25" VerticalAlignment="Top" Value="0" Minimum="0" Maximum="100" Interval="1" LostFocus="Vertices_LostFocus"  />
+        <Label Margin="0,44,0,0" Content="Relaciones" HorizontalAlignment="Center" Width="70" Height="25" VerticalAlignment="Top"/>
+        <DataGrid Margin="10,74,10,10" x:Name="Relations" DataContext="{Binding Source={StaticResource Rutina}}" ItemsSource="{Binding Path=Lineas}"
+                  SelectedItem="{Binding Path=Linea,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" SelectionChanged="Relations_SelectionChanged" AutoGenerateColumns="False"
+                  IsSynchronizedWithCurrentItem="True" CanUserAddRows="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="+" Binding="{Binding Path=otro}"/>
+                <DataGridComboBoxColumn Header="Vértice 1" SelectedValueBinding="{Binding Path=uno,Mode=TwoWay}" DisplayMemberPath="display" IsReadOnly="False">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=Puntos, Source={StaticResource Rutina}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=Puntos, Source={StaticResource Rutina}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridComboBoxColumn Header="Vértice 2" SelectedValueBinding="{Binding Path=dos,Mode=TwoWay}" DisplayMemberPath="display" IsReadOnly="False">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=Puntos, Source={StaticResource Rutina}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=Puntos, Source={StaticResource Rutina}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</c:MetroWindow>
